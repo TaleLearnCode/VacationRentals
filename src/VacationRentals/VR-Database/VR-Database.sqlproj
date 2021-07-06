@@ -70,12 +70,21 @@
     <Build Include="Tables\PhoneNumberType.sql" />
     <Build Include="Tables\UserAccountPhoneNumber.sql" />
     <Build Include="Tables\UserAccountPostalAddress.sql" />
+    <Build Include="Tables\PropertyType.sql" />
+    <Build Include="Tables\Property.sql" />
+    <Build Include="Tables\LanguageCulture.sql" />
+    <Build Include="Tables\Content.sql" />
+    <Build Include="Tables\ContentType.sql" />
+    <Build Include="Tables\ContentCopy.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\PopulateCountry.sql" />
     <None Include="Scripts\PopulateCountryDivision.sql" />
     <None Include="Scripts\PopulatePhoneNumberType.sql" />
     <None Include="Scripts\PopulatePostalAddressType.sql" />
+    <None Include="Scripts\PopulatePropertyType.sql" />
+    <None Include="Scripts\PopulateLanguageCulture.sql" />
+    <None Include="Scripts\PopulateContentType.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
