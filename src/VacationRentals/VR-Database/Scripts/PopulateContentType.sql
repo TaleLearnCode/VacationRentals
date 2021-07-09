@@ -4,7 +4,8 @@ USING (VALUES (1, 1, 'Property Headline'),
               (3, 1, 'Property Description'),
               (4, 1, 'Room Name'),
               (5, 1, 'Room Description'),
-              (6, 1, 'Amenity Type Label'))
+              (6, 1, 'Attribute Type Label'),
+              (7, 1, 'Attribute Lookup Value'))
 AS SOURCE (ContentTypeId,
            IsActive,
            ContentTypeName)

@@ -78,15 +78,12 @@
     <Build Include="Tables\ContentCopy.sql" />
     <Build Include="Tables\RoomType.sql" />
     <Build Include="Tables\Room.sql" />
-    <Build Include="Tables\BedType.sql" />
-    <Build Include="Tables\Bedroom.sql" />
-    <Build Include="Tables\Bathroom.sql" />
-    <Build Include="Tables\BathroomType.sql" />
-    <Build Include="Tables\AmenityCategory.sql" />
-    <Build Include="Tables\AmenityDataType.sql" />
-    <Build Include="Tables\AmenityType.sql" />
-    <Build Include="Tables\Amenity.sql" />
-    <Build Include="Tables\BathroomAmenity.sql" />
+    <Build Include="Tables\AttributeCategory.sql" />
+    <Build Include="Tables\AttributeDataType.sql" />
+    <Build Include="Tables\AttributeType.sql" />
+    <Build Include="Tables\Attribute.sql" />
+    <Build Include="Tables\AttributeLookupValue.sql" />
+    <Build Include="Tables\RoomAttribute.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\PopulateCountry.sql" />
@@ -97,14 +94,17 @@
     <None Include="Scripts\PopulateLanguageCulture.sql" />
     <None Include="Scripts\PopulateContentType.sql" />
     <None Include="Scripts\PopulateRoomType.sql" />
-    <None Include="Scripts\PopulateBedType.sql" />
     <None Include="Scripts\PopulateBathroomType.sql" />
-    <None Include="Scripts\PopulateAmenityCategory.sql" />
-    <None Include="Scripts\PopulateAmenityDataType.sql" />
-    <None Include="Scripts\PopulateAmenityType.sql" />
+    <None Include="Scripts\PopulateAttributeCategory.sql" />
+    <None Include="Scripts\PopulateAttributeDataType.sql" />
+    <None Include="Scripts\PopulateAttributeType.sql" />
     <None Include="Scripts\PopulateContent.sql" />
+    <None Include="Scripts\PopulateAttributeLookupValue.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="VR-Database.refactorlog" />
   </ItemGroup>
 </Project>

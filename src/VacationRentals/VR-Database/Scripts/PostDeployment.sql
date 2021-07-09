@@ -1,17 +1,15 @@
-﻿:r PopulateContentType.sql
+﻿:r PopulateLanguageCulture.sql
+:r PopulateContentType.sql
 :r PopulateContent.sql
 
-:r PopulateAmenityCategory.sql
-:r PopulateAmenityDataType.sql
-:r PopulateBathroomType.sql
-:r PopulateBedType.sql
+:r PopulateAttributeCategory.sql
+:r PopulateAttributeDataType.sql
+:r PopulateAttributeType.sql
+:r PopulateAttributeLookupValue.sql
+
 :r PopulateCountry.sql
 :r PopulateCountryDivision.sql
-:r PopulateLanguageCulture.sql
 :r PopulatePhoneNumberType.sql
 :r PopulatePostalAddressType.sql
 :r PopulatePropertyType.sql
 :r PopulateRoomType.sql
-
-
-:r PopulateAmenityType.sql
