@@ -3,126 +3,126 @@
 MERGE dbo.Content AS TARGET
 USING (VALUES 
               -- Attribute Type: Bed (1)
-              ( 1, 6, 1), -- Attribute Type Label
-              ( 2, 7, 1), -- Bed Type Value: King
-              ( 3, 7, 1), -- Bed Type Value: Queen
-              ( 4, 7, 1), -- Bed Type Value: Double
-              ( 5, 7, 1), -- Bed Type Value: Twin/Single
-              ( 6, 7, 1), -- Bed Type Value: Sleep Sofa/Futon
-              ( 7, 7, 1), -- Bed Type Value: Crib
-              ( 8, 7, 1), -- Bed Type Value: Child's Bed
-              ( 9, 7, 1), -- Bed Type Value: Bunk Bed
-              (10, 7, 1), -- Bed Type Value: Murphy Bed
+              ( 1, 7, 1), -- Attribute Type Label
+              ( 2, 8, 1), -- Bed Type Value: King
+              ( 3, 8, 1), -- Bed Type Value: Queen
+              ( 4, 8, 1), -- Bed Type Value: Double
+              ( 5, 8, 1), -- Bed Type Value: Twin/Single
+              ( 6, 8, 1), -- Bed Type Value: Sleep Sofa/Futon
+              ( 7, 8, 1), -- Bed Type Value: Crib
+              ( 8, 8, 1), -- Bed Type Value: Child's Bed
+              ( 9, 8, 1), -- Bed Type Value: Bunk Bed
+              (10, 8, 1), -- Bed Type Value: Murphy Bed
 
               -- Attribute Type: Bed Count
-              (11, 6, 1), -- Attribute Type Label
+              (11, 7, 1), -- Attribute Type Label
               
               -- Attribute Type: Bathroom Type (3)
-              (12, 6, 1), -- Attribute Type Label
-              (13, 7, 1), -- Bathroom Type : Full
-              (14, 7, 1), -- Bathroom Type : Half
-              (15, 7, 1), -- Bathroom Type : Shower
+              (12, 7, 1), -- Attribute Type Label
+              (13, 8, 1), -- Bathroom Type : Full
+              (14, 8, 1), -- Bathroom Type : Half
+              (15, 8, 1), -- Bathroom Type : Shower
               
               -- Bathroom Attribute Types
-              (16, 6, 1), -- Has Tub
-              (17, 6, 1), -- Has Shower
-              (18, 6, 1), -- Has Jetted Tub
-              (19, 6, 1), -- Has Combination Tub/Shower
-              (20, 6, 1), -- Has Bidet
-              (21, 6, 1), -- Has Toilet
+              (16, 7, 1), -- Has Tub
+              (17, 7, 1), -- Has Shower
+              (18, 7, 1), -- Has Jetted Tub
+              (19, 7, 1), -- Has Combination Tub/Shower
+              (20, 7, 1), -- Has Bidet
+              (21, 7, 1), -- Has Toilet
 
               -- Dining Attribute Types
-              (22, 6, 1), -- Dining Seats
-              (23, 6, 1), -- Has Dining Area
-              (24, 6, 1), -- Has Dining Room
-              (25, 6, 1), -- Has Child's Highchair
+              (22, 7, 1), -- Dining Seats
+              (23, 7, 1), -- Has Dining Area
+              (24, 7, 1), -- Has Dining Room
+              (25, 7, 1), -- Has Child's Highchair
 
               -- Accomodations - Breakfast
-              (26, 6, 1), -- Breakfast
-              (27, 7, 1), -- Included in Price
-              (28, 7, 1), -- Booking Possible
-              (29, 7, 1), -- Not Available
+              (26, 7, 1), -- Breakfast
+              (27, 8, 1), -- Included in Price
+              (28, 8, 1), -- Booking Possible
+              (29, 8, 1), -- Not Available
 
               -- Accomodations - Housekeeping
-              (30, 6, 1), -- Housekeeping
-              (31, 7, 1), -- Housekeeper Included
-              (32, 7, 1), -- Housekeeper Optional
-              (33, 7, 1), -- Ask Owner
+              (30, 7, 1), -- Housekeeping
+              (31, 8, 1), -- Housekeeper Included
+              (32, 8, 1), -- Housekeeper Optional
+              (33, 8, 1), -- Ask Owner
 
               -- Accomodations - Other Services
-              (34, 6, 1), -- Other Services
-              (35, 7, 1), -- Care Available
-              (36, 7, 1), -- Chauffeur
-              (37, 7, 1), -- Childcare
-              (38, 7, 1), -- Concierge
-              (39, 7, 1), -- Massage
-              (40, 7, 1), -- Meal Delivery
-              (41, 7, 1), -- Private Chef
+              (34, 7, 1), -- Other Services
+              (35, 8, 1), -- Care Available
+              (36, 8, 1), -- Chauffeur
+              (37, 8, 1), -- Childcare
+              (38, 8, 1), -- Concierge
+              (39, 8, 1), -- Massage
+              (40, 8, 1), -- Meal Delivery
+              (41, 8, 1), -- Private Chef
 
               -- Themes
-              (42, 6, 1), -- Romantic
-              (43, 6, 1), -- Family
-              (44, 6, 1), -- Historic
+              (42, 7, 1), -- Romantic
+              (43, 7, 1), -- Family
+              (44, 7, 1), -- Historic
               
               -- Property Type
-              (45, 6, 1), -- Property Type
+              (45, 7, 1), -- Property Type
 
-              (46, 7, 1), -- Apartment
-              (47, 7, 1), -- Barn
-              (48, 7, 1), -- Bed & Breakfast
-              (49, 7, 1), -- Boat
-              (50, 7, 1), -- Building
-              (51, 7, 1), -- Bungalow
-              (52, 7, 1), -- Cabin
-              (53, 7, 1), -- Campground
-              (54, 7, 1), -- Caravan
-              (55, 7, 1), -- Castle
-              (56, 7, 1), -- Chalet
-              (57, 7, 1), -- Chateau / Country House
-              (58, 7, 1), -- Chácara/sítio
-              (59, 7, 1), -- Condo
-              (60, 7, 1), -- Corporate Apartment
-              (61, 7, 1), -- Cottage
-              (62, 7, 1), -- Estate
-              (63, 7, 1), -- Farmhouse
-              (64, 7, 1), -- Hotel
-              (65, 7, 1), -- Hotel Suites
-              (66, 7, 1), -- House
-              (67, 7, 1), -- House Boat
-              (68, 7, 1), -- Lodge
-              (69, 7, 1), -- Mas
-              (70, 7, 1), -- Mill
-              (71, 7, 1), -- Mobile Home
-              (72, 7, 1), -- Recreational Vehicle
-              (73, 7, 1), -- Resort
-              (74, 7, 1), -- Riad
-              (75, 7, 1), -- Studio
-              (76, 7, 1), -- Tower
-              (77, 7, 1), -- Townhome
-              (78, 7, 1), -- Villa
-              (79, 7, 1), -- Yacht
+              (46, 10, 1), -- Apartment
+              (47, 10, 1), -- Barn
+              (48, 10, 1), -- Bed & Breakfast
+              (49, 10, 1), -- Boat
+              (50, 10, 1), -- Building
+              (51, 10, 1), -- Bungalow
+              (52, 10, 1), -- Cabin
+              (53, 10, 1), -- Campground
+              (54, 10, 1), -- Caravan
+              (55, 10, 1), -- Castle
+              (56, 10, 1), -- Chalet
+              (57, 10, 1), -- Chateau / Country House
+              (58, 10, 1), -- Chácara/sítio
+              (59, 10, 1), -- Condo
+              (60, 10, 1), -- Corporate Apartment
+              (61, 10, 1), -- Cottage
+              (62, 10, 1), -- Estate
+              (63, 10, 1), -- Farmhouse
+              (64, 10, 1), -- Hotel
+              (65, 10, 1), -- Hotel Suites
+              (66, 10, 1), -- House
+              (67, 10, 1), -- House Boat
+              (68, 10, 1), -- Lodge
+              (69, 10, 1), -- Mas
+              (70, 10, 1), -- Mill
+              (71, 10, 1), -- Mobile Home
+              (72, 10, 1), -- Recreational Vehicle
+              (73, 10, 1), -- Resort
+              (74, 10, 1), -- Riad
+              (75, 10, 1), -- Studio
+              (76, 10, 1), -- Tower
+              (77, 10, 1), -- Townhome
+              (78, 10, 1), -- Villa
+              (79, 10, 1), -- Yacht
 
               -- Amenties - Kitchen and Dining
-              (80, 6, 1), -- Kitchen
-              (81, 6, 1), -- Blender
-              (82, 6, 1), -- Dishes & utensils for kids
-              (83, 6, 1), -- Ice Maker
-              (84, 6, 1), -- Coffee Maker
-              (85, 6, 1), -- Grill
-              (86, 6, 1), -- Oven
-              (87, 6, 1), -- Stove
-              (88, 6, 1), -- Kitchenette
-              (89, 6, 1), -- Refrigerator
-              (90, 6, 1), -- Toaster
-              (91, 6, 1), -- Dishwasher
-              (92, 6, 1), -- Microwave
-              (93, 6, 1), -- Lobster Pot
-              (94, 6, 1), -- Pantry Items
-              (95, 6, 1), -- Dining Table
-              (96, 6, 1), -- Kitchen Island
-              (97, 6, 1), -- Coffee Grinder
-              (98, 6, 1), -- Kettle
-              (99, 6, 1)) -- Dishes & Utensils
+              (80, 7, 1), -- Kitchen
+              (81, 7, 1), -- Blender
+              (82, 7, 1), -- Dishes & utensils for kids
+              (83, 7, 1), -- Ice Maker
+              (84, 7, 1), -- Coffee Maker
+              (85, 7, 1), -- Grill
+              (86, 7, 1), -- Oven
+              (87, 7, 1), -- Stove
+              (88, 7, 1), -- Kitchenette
+              (89, 7, 1), -- Refrigerator
+              (90, 7, 1), -- Toaster
+              (91, 7, 1), -- Dishwasher
+              (92, 7, 1), -- Microwave
+              (93, 7, 1), -- Lobster Pot
+              (94, 7, 1), -- Pantry Items
+              (95, 7, 1), -- Dining Table
+              (96, 7, 1), -- Kitchen Island
+              (97, 7, 1), -- Coffee Grinder
+              (98, 7, 1), -- Kettle
+              (99, 7, 1)) -- Dishes & Utensils
 
 AS SOURCE (ContentId,
            ContentTypeId,

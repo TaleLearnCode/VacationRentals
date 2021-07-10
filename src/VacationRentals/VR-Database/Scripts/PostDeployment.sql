@@ -13,3 +13,5 @@
 :r PopulatePostalAddressType.sql
 :r PopulatePropertyType.sql
 :r PopulateRoomType.sql
+
+:r PopulateTestData.sql

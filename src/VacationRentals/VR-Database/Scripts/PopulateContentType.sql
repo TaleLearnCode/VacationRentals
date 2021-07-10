@@ -1,11 +1,14 @@
 ﻿MERGE dbo.ContentType AS TARGET
-USING (VALUES (1, 1, 'Property Headline'),
-              (2, 1, 'Property Summary'),
-              (3, 1, 'Property Description'),
-              (4, 1, 'Room Name'),
-              (5, 1, 'Room Description'),
-              (6, 1, 'Attribute Type Label'),
-              (7, 1, 'Attribute Lookup Value'))
+USING (VALUES ( 1, 1, 'Property Headline'),
+              ( 2, 1, 'Property Summary'),
+              ( 3, 1, 'Property Description'),
+              ( 4, 1, 'Room Name'),
+              ( 5, 1, 'Room Description'),
+              ( 6, 1, 'Property Name'),
+              ( 7, 1, 'Attribute Type Label'),
+              ( 8, 1, 'Attribute Lookup Value'),
+              ( 9, 1, 'Attribute Value'),
+              (10, 1, 'Property Type Label'))
 AS SOURCE (ContentTypeId,
            IsActive,
            ContentTypeName)

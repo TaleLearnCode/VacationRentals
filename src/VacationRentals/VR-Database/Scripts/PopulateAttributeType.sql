@@ -28,9 +28,6 @@ USING (VALUES
               (17, 5, 43, 2, 1, 1, 0, 'Family'),
               (18, 5, 44, 3, 1, 1, 0, 'Historic'),
 
-              -- Category: Property
-              (19, 6, 45, 0, 1, 4, 0, 'Property Type'),
-
               -- Category: Amenities - Kitchen and Dining
               (20, 7, 80,  1, 1, 1, 1, 'Kitchen'),
               (21, 7, 81,  2, 1, 1, 0, 'Blender'),
