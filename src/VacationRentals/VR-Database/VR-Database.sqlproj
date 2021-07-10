@@ -81,7 +81,7 @@
     <Build Include="Tables\AttributeCategory.sql" />
     <Build Include="Tables\AttributeDataType.sql" />
     <Build Include="Tables\AttributeType.sql" />
-    <Build Include="Tables\Attribute.sql" />
+    <Build Include="Tables\AttributeValue.sql" />
     <Build Include="Tables\AttributeLookupValue.sql" />
     <Build Include="Tables\RoomAttribute.sql" />
     <Build Include="Tables\RentalRate.sql" />

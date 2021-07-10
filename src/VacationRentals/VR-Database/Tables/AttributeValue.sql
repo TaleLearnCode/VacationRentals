@@ -1,4 +1,4 @@
-﻿CREATE TABLE dbo.Attribute
+﻿CREATE TABLE dbo.AttributeValue
 (
   AttributeId            INT         NOT NULL IDENTITY(1,1),
   AttributeTypeId        INT         NOT NULL,

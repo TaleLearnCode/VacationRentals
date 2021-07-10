@@ -366,10 +366,10 @@ WHEN NOT MATCHED THEN INSERT (RoomId,
 
 SET IDENTITY_INSERT dbo.Room OFF
 
--- Attribute
-SET IDENTITY_INSERT dbo.Attribute ON
+-- AttributeValue
+SET IDENTITY_INSERT dbo.AttributeValue ON
 
-MERGE dbo.Attribute AS TARGET
+MERGE dbo.AttributeValue AS TARGET
 USING (VALUES
               -- Property 1
               ( 86, 14,   13, NULL, NULL),  -- Breakfast
@@ -553,7 +553,7 @@ WHEN NOT MATCHED THEN INSERT (AttributeId,
                               SOURCE.AttributeNumbericValue,
                               SOURCE.AttributeAlphaValueId);
 
-SET IDENTITY_INSERT dbo.Attribute OFF
+SET IDENTITY_INSERT dbo.AttributeValue OFF
 
 -- RoomAttribute
 MERGE dbo.RoomAttribute AS TARGET
