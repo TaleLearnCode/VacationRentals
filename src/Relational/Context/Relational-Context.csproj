@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VR-Entity\VR-Entity.csproj" />
+    <ProjectReference Include="..\Entity\Relational-Entity.csproj" />
   </ItemGroup>
 
 </Project>
