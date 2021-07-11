@@ -1,4 +1,4 @@
-﻿namespace TaleLearnCode.VacationRentals.Contexts
+﻿namespace TaleLearnCode.VacationRentals.Relational
 {
 
 	/// <summary>

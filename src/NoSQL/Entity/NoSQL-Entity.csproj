@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>TaleLearnCode.VacationRentals.NoSQL.Entities</RootNamespace>
+    <AssemblyName>TaleLearnCode.VacationRentals.NoSQL.Entities</AssemblyName>
+  </PropertyGroup>
+
+</Project>

@@ -1,28 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TaleLearnCode.VacationRentals.Entities;
+using TaleLearnCode.VacationRentals.Relational.Entities;
 
-namespace TaleLearnCode.VacationRentals.Contexts
+namespace TaleLearnCode.VacationRentals.Relational
 {
 
-	public partial class VacationRentalsSQLContext : DbContext
+	public partial class VacationRentalsContext : DbContext
 	{
 
 		private readonly ISQLSettings _sqlSettings;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="VacationRentalsSQLContext>"/> class.
+		/// Initializes a new instance of the <see cref="VacationRentalsContext>"/> class.
 		/// </summary>
 		/// <param name="sqlSettings">The settings to use for connecting and interacting with the SQL Server database.</param>
-		public VacationRentalsSQLContext(ISQLSettings sqlSettings)
+		public VacationRentalsContext(ISQLSettings sqlSettings)
 		{
 			_sqlSettings = sqlSettings;
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="VacationRentalsSQLContext"/> class.
+		/// Initializes a new instance of the <see cref="VacationRentalsContext"/> class.
 		/// </summary>
 		/// <param name="options">The <see cref="DbContextOptions{VacationRentalsSQLContext}"/> to use for initializing the context.</param>
-		public VacationRentalsSQLContext(DbContextOptions<VacationRentalsSQLContext> options) : base(options) { }
+		public VacationRentalsContext(DbContextOptions<VacationRentalsContext> options) : base(options) { }
 
 		/// <summary>
 		/// Called by Entity Framework while it is configuring the data connection

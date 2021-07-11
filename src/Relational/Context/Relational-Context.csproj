@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>TaleLearnCode.VacationRentals.Contexts</RootNamespace>
-    <AssemblyName>TaleLearnCode.VacationRentals.SQLContext</AssemblyName>
+    <RootNamespace>TaleLearnCode.VacationRentals.Relational</RootNamespace>
+    <AssemblyName>TaleLearnCode.VacationRentals.Relational.Context</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

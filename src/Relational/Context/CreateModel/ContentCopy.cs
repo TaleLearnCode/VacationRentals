@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TaleLearnCode.VacationRentals.Entities;
+using TaleLearnCode.VacationRentals.Relational.Entities;
 
-namespace TaleLearnCode.VacationRentals.Contexts
+namespace TaleLearnCode.VacationRentals.Relational
 {
 
 	internal static partial class CreateModel

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TaleLearnCode.VacationRentals.Entities
+namespace TaleLearnCode.VacationRentals.Relational.Entities
 {
 
 	public class AttributeCategory

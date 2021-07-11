@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>TaleLearnCode.VacationRentals.Entities</RootNamespace>
-    <AssemblyName>TaleLearnCode.VacationRentals.Entities</AssemblyName>
+    <RootNamespace>TaleLearnCode.VacationRentals.Relational.Entities</RootNamespace>
+    <AssemblyName>TaleLearnCode.VacationRentals.Relational.Entities</AssemblyName>
     <Version>0.0.0-pre</Version>
     <Authors>Tale Learn Code</Authors>
     <Company>Green Events &amp; Technology, LLC.</Company>

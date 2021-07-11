@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaleLearnCode.VacationRentals.Entities
+namespace TaleLearnCode.VacationRentals.Relational.Entities
 {
 	public class RentalRate
 	{
