@@ -12,7 +12,7 @@ namespace TaleLearnCode.VacationRentals.Entities
 			RoomAttributes = new HashSet<RoomAttribute>();
 		}
 
-		public int AttributeId { get; set; }
+		public int Id { get; set; }
 
 		public int AttributeTypeId { get; set; }
 

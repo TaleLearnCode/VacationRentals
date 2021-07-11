@@ -13,7 +13,7 @@ namespace TaleLearnCode.VacationRentals.Entities
 
 		public int Id { get; set; }
 
-		public int TypeId { get; set; }
+		public int PhoneNumberTypeId { get; set; }
 
 		public string StreetAddress1 { get; set; }
 
@@ -22,6 +22,8 @@ namespace TaleLearnCode.VacationRentals.Entities
 		public string City { get; set; }
 
 		public string CountryDivisionCode { get; set; }
+
+		public string CountryCode { get; set; }
 
 		public string PostalCode { get; set; }
 
