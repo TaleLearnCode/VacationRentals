@@ -6,4 +6,9 @@
     <AssemblyName>TaleLearnCode.VacationRentals.NoSQL.Entities</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NEST" Version="7.13.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
 </Project>
