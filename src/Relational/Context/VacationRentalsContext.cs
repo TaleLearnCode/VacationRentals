@@ -33,7 +33,7 @@ namespace TaleLearnCode.VacationRentals.Relational
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer(_sqlSettings.ConnectionString, options => options.EnableRetryOnFailure());
+				optionsBuilder.UseSqlServer(_sqlSettings.SQLConnectionString, options => options.EnableRetryOnFailure());
 			}
 		}
 

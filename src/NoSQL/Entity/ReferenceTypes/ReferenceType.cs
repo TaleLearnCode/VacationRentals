@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 {
@@ -13,8 +12,14 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 		[JsonProperty(PropertyName = "referenceTypeName")]
 		public string ReferenceTypeName { get; set; }
 
+		[JsonProperty(PropertyName = "systemName")]
+		public string SystemName { get; set; }
+
 		[JsonProperty(PropertyName = "name")]
-		public List<ContentCopy> Name { get; set; }
+		public ContentCopy Name { get; set; }
+
+		[JsonProperty(PropertyName = "sortOrder")]
+		public int? SortOrder { get; set; }
 
 		[JsonProperty(PropertyName = "isDeleted")]
 		public bool IsDeleted { get; set; }

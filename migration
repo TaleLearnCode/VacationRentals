@@ -1,0 +1,25 @@
+	Country
+	CountryDivision
+	LanguageCulture
+		ContentType
+	PhoneNumberType
+	PostalAddressType
+	PropertyType
+	RoomType
+UserAccount
+PostalAddress
+PhoneNumber
+UserAccountPhoneNumber
+UserAccountPostalAddress
+AttributeDataType
+AttributeCategory
+AttributeType
+AttributeLookupValue
+Property
+PropertyAttribute
+RentalRate
+Room
+AttributeValue
+RoomAttribute
+Content
+ContentCopy

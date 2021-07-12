@@ -9,6 +9,9 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 		[JsonProperty(PropertyName = "id")]
 		public string Id { get; set; }
 
+		[JsonProperty(PropertyName = "referenceTypeName")]
+		public string ReferenceTypeName => "LanguageCulture";
+
 		[JsonProperty(PropertyName = "languageCode")]
 		public string LanguageCode { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 {
@@ -27,6 +28,10 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 			set { base[code] = value; }
 		}
 
+		public static implicit operator CountryDivisionListing(CountryDivision v)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 }
