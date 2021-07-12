@@ -15,18 +15,13 @@ namespace TaleLearnCode.VacationRentals.Relational
 		{
 			modelBuilder.Entity<AttributeCategory>(entity =>
 			{
-
 				entity.ToTable("AttributeCategory");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("AttributeCategoryId")
-					.ValueGeneratedNever();
+				entity.Property(e => e.AttributeCategoryId).ValueGeneratedNever();
 
-				entity.Property(e => e.Name)
-					.HasColumnName("AttributeCategoryName")
-					.IsRequired()
-					.HasMaxLength(100);
-
+				entity.Property(e => e.AttributeCategoryName)
+						.IsRequired()
+						.HasMaxLength(100);
 			});
 		}
 

@@ -17,52 +17,49 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("PostalAddress");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("PostalAddressId");
-
 				entity.Property(e => e.City)
-					.IsRequired()
-					.HasMaxLength(100);
+						.IsRequired()
+						.HasMaxLength(100);
 
 				entity.Property(e => e.CountryCode)
-					.IsRequired()
-					.HasMaxLength(2)
-					.IsUnicode(false)
-					.IsFixedLength();
+						.IsRequired()
+						.HasMaxLength(2)
+						.IsUnicode(false)
+						.IsFixedLength(true);
 
 				entity.Property(e => e.CountryDivisionCode)
-					.HasMaxLength(3)
-					.IsUnicode(false)
-					.IsFixedLength();
+						.HasMaxLength(3)
+						.IsUnicode(false)
+						.IsFixedLength(true);
 
 				entity.Property(e => e.IsActive)
-					.IsRequired()
-					.HasDefaultValueSql("((1))");
+						.IsRequired()
+						.HasDefaultValueSql("((1))");
 
 				entity.Property(e => e.PostalCode)
-					.HasMaxLength(20)
-					.IsUnicode(false);
+						.HasMaxLength(20)
+						.IsUnicode(false);
 
 				entity.Property(e => e.StreetAddress1).HasMaxLength(100);
 
 				entity.Property(e => e.StreetAddress2).HasMaxLength(100);
 
-				entity.HasOne(d => d.Country)
-					.WithMany(p => p.PostalAddresses)
-					.HasForeignKey(d => d.CountryCode)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkPostalAddress_Country");
+				entity.HasOne(d => d.CountryCodeNavigation)
+						.WithMany(p => p.PostalAddresses)
+						.HasForeignKey(d => d.CountryCode)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkPostalAddress_Country");
 
 				entity.HasOne(d => d.PostalAddressType)
-					.WithMany(p => p.PostalAddresses)
-					.HasForeignKey(d => d.PhoneNumberTypeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkPostalAddress_PostalAddressType");
+						.WithMany(p => p.PostalAddresses)
+						.HasForeignKey(d => d.PostalAddressTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkPostalAddress_PostalAddressType");
 
 				entity.HasOne(d => d.Country)
-					.WithMany(p => p.PostalAddresses)
-					.HasForeignKey(d => new { d.CountryDivisionCode, d.CountryCode })
-					.HasConstraintName("fkPostalAddress_CountryDivision");
+						.WithMany(p => p.PostalAddresses)
+						.HasForeignKey(d => new { d.CountryDivisionCode, d.CountryCode })
+						.HasConstraintName("fkPostalAddress_CountryDivision");
 			});
 		}
 

@@ -16,21 +16,21 @@ namespace TaleLearnCode.VacationRentals.Relational
 			modelBuilder.Entity<UserAccountPostalAddress>(entity =>
 			{
 				entity.HasKey(e => new { e.UserAccountId, e.PostalAddressId })
-					.HasName("pkcUserAccountPostalAddress");
+						.HasName("pkcUserAccountPostalAddress");
 
 				entity.ToTable("UserAccountPostalAddress");
 
 				entity.HasOne(d => d.PostalAddress)
-					.WithMany(p => p.UserAccountPostalAddresses)
-					.HasForeignKey(d => d.PostalAddressId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkUserAccountPostalAddress_PostalAddress");
+						.WithMany(p => p.UserAccountPostalAddresses)
+						.HasForeignKey(d => d.PostalAddressId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkUserAccountPostalAddress_PostalAddress");
 
 				entity.HasOne(d => d.UserAccount)
-					.WithMany(p => p.UserAccountPostalAddresses)
-					.HasForeignKey(d => d.UserAccountId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkUserAccountPostalAddress_UserAccount");
+						.WithMany(p => p.UserAccountPostalAddresses)
+						.HasForeignKey(d => d.UserAccountId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkUserAccountPostalAddress_UserAccount");
 			});
 		}
 

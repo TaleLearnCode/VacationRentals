@@ -17,38 +17,29 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("AttributeType");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("AttributeTypeId")
-					.ValueGeneratedNever();
+				entity.Property(e => e.AttributeTypeId).ValueGeneratedNever();
 
-				entity.Property(e => e.Name)
-					.HasColumnName("AttributeTypeName")
-					.IsRequired()
-					.HasMaxLength(100);
-
-				entity.Property(e => e.DataTypeId)
-					.HasColumnName("AttributeDataTypeId");
-
-				entity.Property(e => e.CategoryId)
-					.HasColumnName("AttributeCategoryId");
+				entity.Property(e => e.AttributeTypeName)
+						.IsRequired()
+						.HasMaxLength(100);
 
 				entity.HasOne(d => d.AttributeCategory)
-					.WithMany(p => p.AttributeTypes)
-					.HasForeignKey(d => d.Id)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkAttributeType_AttributeCategory");
+						.WithMany(p => p.AttributeTypes)
+						.HasForeignKey(d => d.AttributeCategoryId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkAttributeType_AttributeCategory");
 
 				entity.HasOne(d => d.AttributeDataType)
-					.WithMany(p => p.AttributeTypes)
-					.HasForeignKey(d => d.Id)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkAttributeType_AttributeDataType");
+						.WithMany(p => p.AttributeTypes)
+						.HasForeignKey(d => d.AttributeDataTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkAttributeType_AttributeDataType");
 
 				entity.HasOne(d => d.Label)
-					.WithMany(p => p.AttributeTypes)
-					.HasForeignKey(d => d.LabelId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkAttributeType_Content_Label");
+						.WithMany(p => p.AttributeTypes)
+						.HasForeignKey(d => d.LabelId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkAttributeType_Content_Label");
 			});
 		}
 

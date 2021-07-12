@@ -15,26 +15,24 @@ namespace TaleLearnCode.VacationRentals.Relational
 		{
 			modelBuilder.Entity<Country>(entity =>
 			{
-				entity.HasKey(e => e.Code)
-					.HasName("pkcCountry");
+				entity.HasKey(e => e.CountryCode)
+						.HasName("pkcCountry");
 
 				entity.ToTable("Country");
 
-				entity.Property(e => e.Code)
-					.HasColumnName("CountryCode")
-					.HasMaxLength(2)
-					.IsUnicode(false)
-					.IsFixedLength();
+				entity.Property(e => e.CountryCode)
+						.HasMaxLength(2)
+						.IsUnicode(false)
+						.IsFixedLength(true);
 
-				entity.Property(e => e.Name)
-					.HasColumnName("CountryName")
-					.IsRequired()
-					.HasMaxLength(100)
-					.IsUnicode(false);
+				entity.Property(e => e.CountryName)
+						.IsRequired()
+						.HasMaxLength(100)
+						.IsUnicode(false);
 
 				entity.Property(e => e.DivisionName)
-					.HasMaxLength(100)
-					.IsUnicode(false);
+						.HasMaxLength(100)
+						.IsUnicode(false);
 			});
 		}
 

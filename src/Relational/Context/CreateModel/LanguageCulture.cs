@@ -17,24 +17,23 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("LanguageCulture");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("LanguageCultureId")
-					.HasMaxLength(15)
-					.IsUnicode(false);
+				entity.Property(e => e.LanguageCultureId)
+						.HasMaxLength(15)
+						.IsUnicode(false);
 
 				entity.Property(e => e.EnglishName)
-					.IsRequired()
-					.HasMaxLength(100);
+						.IsRequired()
+						.HasMaxLength(100);
 
 				entity.Property(e => e.LanguageCode)
-					.IsRequired()
-					.HasMaxLength(3)
-					.IsUnicode(false)
-					.IsFixedLength();
+						.IsRequired()
+						.HasMaxLength(3)
+						.IsUnicode(false)
+						.IsFixedLength(true);
 
 				entity.Property(e => e.NativeName)
-					.IsRequired()
-					.HasMaxLength(100);
+						.IsRequired()
+						.HasMaxLength(100);
 			});
 		}
 

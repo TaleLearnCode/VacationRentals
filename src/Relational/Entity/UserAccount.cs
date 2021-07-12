@@ -3,9 +3,8 @@
 namespace TaleLearnCode.VacationRentals.Relational.Entities
 {
 
-	public class UserAccount
+	public partial class UserAccount
 	{
-
 		public UserAccount()
 		{
 			Properties = new HashSet<Property>();
@@ -13,20 +12,14 @@ namespace TaleLearnCode.VacationRentals.Relational.Entities
 			UserAccountPostalAddresses = new HashSet<UserAccountPostalAddress>();
 		}
 
-		public int Id { get; set; }
-
+		public int UserAccountId { get; set; }
 		public string FirstName { get; set; }
-
 		public string LastName { get; set; }
-
 		public bool IsPropertyManager { get; set; }
 
 		public virtual ICollection<Property> Properties { get; set; }
-
 		public virtual ICollection<UserAccountPhoneNumber> UserAccountPhoneNumbers { get; set; }
-
 		public virtual ICollection<UserAccountPostalAddress> UserAccountPostalAddresses { get; set; }
-
 	}
 
 }

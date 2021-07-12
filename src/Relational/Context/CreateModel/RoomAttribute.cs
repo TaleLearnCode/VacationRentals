@@ -16,21 +16,21 @@ namespace TaleLearnCode.VacationRentals.Relational
 			modelBuilder.Entity<RoomAttribute>(entity =>
 			{
 				entity.HasKey(e => new { e.RoomId, e.AttributeId })
-					.HasName("pkcRoomAttribute");
+						.HasName("pkcRoomAttribute");
 
 				entity.ToTable("RoomAttribute");
 
 				entity.HasOne(d => d.Attribute)
-					.WithMany(p => p.RoomAttributes)
-					.HasForeignKey(d => d.AttributeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkRoomAttribute_Attribute");
+						.WithMany(p => p.RoomAttributes)
+						.HasForeignKey(d => d.AttributeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkRoomAttribute_Attribute");
 
 				entity.HasOne(d => d.Room)
-					.WithMany(p => p.RoomAttributes)
-					.HasForeignKey(d => d.RoomId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkRoomAttribute_Room");
+						.WithMany(p => p.RoomAttributes)
+						.HasForeignKey(d => d.RoomId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkRoomAttribute_Room");
 			});
 		}
 

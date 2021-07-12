@@ -15,40 +15,30 @@ namespace TaleLearnCode.VacationRentals.Relational
 		{
 			modelBuilder.Entity<AttributeValue>(entity =>
 			{
-				entity.HasKey(e => e.Id)
-					.HasName("pkcAttribute");
+				entity.HasKey(e => e.AttributeId)
+						.HasName("pkcAttribute");
 
 				entity.ToTable("AttributeValue");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("AttributeId");
+				entity.Property(e => e.AttributeNumbericValue)
+						.HasMaxLength(20)
+						.IsUnicode(false);
 
-				entity.Property(e => e.LookupValueId)
-					.HasColumnName("AttributeLookupValueId");
+				entity.HasOne(d => d.AttributeAlphaValue)
+						.WithMany(p => p.AttributeValues)
+						.HasForeignKey(d => d.AttributeAlphaValueId)
+						.HasConstraintName("fkAttribute_Content");
 
-				entity.Property(e => e.NumericValue)
-					.HasColumnName("AttributeNumbericValue")
-					.HasMaxLength(20)
-					.IsUnicode(false);
-
-				entity.Property(e => e.AlphaValueId)
-					.HasColumnName("AttributeAlphaValueId");
-
-				entity.HasOne(d => d.AlphaValue)
-					.WithMany(p => p.AttributeValues)
-					.HasForeignKey(d => d.AlphaValueId)
-					.HasConstraintName("fkAttribute_Content");
-
-				entity.HasOne(d => d.LookupValue)
-					.WithMany(p => p.AttributeValues)
-					.HasForeignKey(d => d.LookupValueId)
-					.HasConstraintName("fkAttribute_AttributeLookupValue");
+				entity.HasOne(d => d.AttributeLookupValue)
+						.WithMany(p => p.AttributeValues)
+						.HasForeignKey(d => d.AttributeLookupValueId)
+						.HasConstraintName("fkAttribute_AttributeLookupValue");
 
 				entity.HasOne(d => d.AttributeType)
-					.WithMany(p => p.AttributeValues)
-					.HasForeignKey(d => d.AttributeTypeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkAttribute_AttributeType");
+						.WithMany(p => p.AttributeValues)
+						.HasForeignKey(d => d.AttributeTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkAttribute_AttributeType");
 			});
 		}
 

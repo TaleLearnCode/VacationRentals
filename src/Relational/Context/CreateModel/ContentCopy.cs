@@ -16,27 +16,27 @@ namespace TaleLearnCode.VacationRentals.Relational
 			modelBuilder.Entity<ContentCopy>(entity =>
 			{
 				entity.HasKey(e => new { e.ContentId, e.LanguageCultureId })
-					.HasName("pkcContentCopy");
+						.HasName("pkcContentCopy");
 
 				entity.ToTable("ContentCopy");
 
 				entity.Property(e => e.LanguageCultureId)
-					.HasMaxLength(15)
-					.IsUnicode(false);
+						.HasMaxLength(15)
+						.IsUnicode(false);
 
 				entity.Property(e => e.CopyText).IsRequired();
 
 				entity.HasOne(d => d.Content)
-					.WithMany(p => p.ContentCopies)
-					.HasForeignKey(d => d.ContentId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkContentCopy_Content");
+						.WithMany(p => p.ContentCopies)
+						.HasForeignKey(d => d.ContentId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkContentCopy_Content");
 
 				entity.HasOne(d => d.LanguageCulture)
-					.WithMany(p => p.ContentCopies)
-					.HasForeignKey(d => d.LanguageCultureId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkContentCopy_LanguageCultureId");
+						.WithMany(p => p.ContentCopies)
+						.HasForeignKey(d => d.LanguageCultureId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkContentCopy_LanguageCultureId");
 			});
 
 		}

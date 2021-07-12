@@ -17,22 +17,18 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("PropertyType");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("PropertyTypeId")
-					.ValueGeneratedNever();
+				entity.Property(e => e.PropertyTypeId).ValueGeneratedNever();
 
-				entity.Property(e => e.Name)
-					.HasColumnName("PropertyTypeName")
-					.IsRequired()
-					.HasMaxLength(100);
+				entity.Property(e => e.PropertyTypeName)
+						.IsRequired()
+						.HasMaxLength(100);
 
 				entity.HasOne(d => d.Label)
-					.WithMany(p => p.PropertyTypes)
-					.HasForeignKey(d => d.LabelId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkPropertyType_Content_Label");
+						.WithMany(p => p.PropertyTypes)
+						.HasForeignKey(d => d.LabelId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkPropertyType_Content_Label");
 			});
-
 		}
 
 	}

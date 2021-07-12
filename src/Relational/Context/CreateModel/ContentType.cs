@@ -17,15 +17,12 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("ContentType");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("ContentTypeId")
-					.ValueGeneratedNever();
+				entity.Property(e => e.ContentTypeId).ValueGeneratedNever();
 
-				entity.Property(e => e.Name)
-					.HasColumnName("ContentTypeName")
-					.IsRequired()
-					.HasMaxLength(100)
-					.IsUnicode(false);
+				entity.Property(e => e.ContentTypeName)
+						.IsRequired()
+						.HasMaxLength(100)
+						.IsUnicode(false);
 			});
 		}
 

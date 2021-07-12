@@ -16,16 +16,13 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("UserAccount");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("UserAccountId");
-
 				entity.Property(e => e.FirstName)
-					.IsRequired()
-					.HasMaxLength(100);
+						.IsRequired()
+						.HasMaxLength(100);
 
 				entity.Property(e => e.LastName)
-					.IsRequired()
-					.HasMaxLength(100);
+						.IsRequired()
+						.HasMaxLength(100);
 			});
 		}
 

@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoSQL", "NoSQL", "{DAA74D2F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSQL-Entity", "NoSQL\Entity\NoSQL-Entity.csproj", "{9863A223-2BDE-4F6E-A6FE-CF511800AD00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{98DB3B40-F235-495F-8E6E-47C3A6F86A6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities-MigrateToCosmos", "Utilities\Utilities-MigrateToCosmos\Utilities-MigrateToCosmos.csproj", "{F492AF8C-F68A-453F-BD06-FD7863B35510}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{9863A223-2BDE-4F6E-A6FE-CF511800AD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9863A223-2BDE-4F6E-A6FE-CF511800AD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9863A223-2BDE-4F6E-A6FE-CF511800AD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F492AF8C-F68A-453F-BD06-FD7863B35510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F492AF8C-F68A-453F-BD06-FD7863B35510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F492AF8C-F68A-453F-BD06-FD7863B35510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F492AF8C-F68A-453F-BD06-FD7863B35510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{BA178C5A-4ABC-4225-A3AE-F33DB024A9AE} = {50A730F1-280D-4591-95C0-C97F60EE0990}
 		{FC6139FB-D28B-4F7C-86BA-F2BA15BFDF90} = {50A730F1-280D-4591-95C0-C97F60EE0990}
 		{9863A223-2BDE-4F6E-A6FE-CF511800AD00} = {DAA74D2F-689D-4CCE-830D-8A566DEDEFA7}
+		{F492AF8C-F68A-453F-BD06-FD7863B35510} = {98DB3B40-F235-495F-8E6E-47C3A6F86A6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6913251-188C-471B-ABCA-75529CAEA190}

@@ -17,26 +17,23 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("PhoneNumber");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("PhoneNumberId");
-
 				entity.Property(e => e.CountryCode)
-					.IsRequired()
-					.HasMaxLength(3)
-					.IsUnicode(false)
-					.IsFixedLength();
+						.IsRequired()
+						.HasMaxLength(3)
+						.IsUnicode(false)
+						.IsFixedLength(true);
 
-				entity.Property(e => e.Number)
-					.IsRequired()
-					.HasMaxLength(20)
-					.IsUnicode(false)
-					.HasColumnName("PhoneNumber");
+				entity.Property(e => e.PhoneNumber1)
+						.IsRequired()
+						.HasMaxLength(20)
+						.IsUnicode(false)
+						.HasColumnName("PhoneNumber");
 
 				entity.HasOne(d => d.PhoneNumberType)
-					.WithMany(p => p.PhoneNumbers)
-					.HasForeignKey(d => d.PhoneNumberTypeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkPhoneNumber_PhoneNumberType");
+						.WithMany(p => p.PhoneNumbers)
+						.HasForeignKey(d => d.PhoneNumberTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkPhoneNumber_PhoneNumberType");
 			});
 		}
 

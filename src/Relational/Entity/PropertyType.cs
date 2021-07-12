@@ -2,24 +2,19 @@
 
 namespace TaleLearnCode.VacationRentals.Relational.Entities
 {
-	public class PropertyType
+	public partial class PropertyType
 	{
-
 		public PropertyType()
 		{
 			Properties = new HashSet<Property>();
 		}
 
-		public int Id { get; set; }
-
-		public string Name { get; set; }
-
+		public int PropertyTypeId { get; set; }
+		public string PropertyTypeName { get; set; }
 		public int LabelId { get; set; }
-
 		public bool IsActive { get; set; }
 
 		public virtual Content Label { get; set; }
-
 		public virtual ICollection<Property> Properties { get; set; }
 	}
 }

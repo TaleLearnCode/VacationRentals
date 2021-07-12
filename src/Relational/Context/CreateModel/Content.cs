@@ -16,17 +16,11 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("Content");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("ContentId");
-
-				entity.Property(e => e.TypeId)
-					.HasColumnName("ContentTypeId");
-
 				entity.HasOne(d => d.ContentType)
-					.WithMany(p => p.Contents)
-					.HasForeignKey(d => d.TypeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkContent_ContentType");
+						.WithMany(p => p.Contents)
+						.HasForeignKey(d => d.ContentTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkContent_ContentType");
 			});
 		}
 

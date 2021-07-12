@@ -16,21 +16,21 @@ namespace TaleLearnCode.VacationRentals.Relational
 			modelBuilder.Entity<UserAccountPhoneNumber>(entity =>
 			{
 				entity.HasKey(e => new { e.UserAccountId, e.PhoneNumberId })
-					.HasName("pkcUserAccountPhoneNumber");
+						.HasName("pkcUserAccountPhoneNumber");
 
 				entity.ToTable("UserAccountPhoneNumber");
 
 				entity.HasOne(d => d.PhoneNumber)
-					.WithMany(p => p.UserAccountPhoneNumbers)
-					.HasForeignKey(d => d.PhoneNumberId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkUserAccountPhoneNumber_PhoneNumber");
+						.WithMany(p => p.UserAccountPhoneNumbers)
+						.HasForeignKey(d => d.PhoneNumberId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkUserAccountPhoneNumber_PhoneNumber");
 
 				entity.HasOne(d => d.UserAccount)
-					.WithMany(p => p.UserAccountPhoneNumbers)
-					.HasForeignKey(d => d.UserAccountId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkUserAccountPhoneNumber_UserAccount");
+						.WithMany(p => p.UserAccountPhoneNumbers)
+						.HasForeignKey(d => d.UserAccountId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkUserAccountPhoneNumber_UserAccount");
 			});
 		}
 

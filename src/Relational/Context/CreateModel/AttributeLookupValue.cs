@@ -17,21 +17,19 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("AttributeLookupValue");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("AttributeLookupValueId")
-					.ValueGeneratedNever();
+				entity.Property(e => e.AttributeLookupValueId).ValueGeneratedNever();
 
 				entity.HasOne(d => d.AttributeType)
-					.WithMany(p => p.AttributeLookupValues)
-					.HasForeignKey(d => d.AttributeTypeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkAttributeLookupValue_AttributeType");
+						.WithMany(p => p.AttributeLookupValues)
+						.HasForeignKey(d => d.AttributeTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkAttributeLookupValue_AttributeType");
 
 				entity.HasOne(d => d.PossibleValue)
-					.WithMany(p => p.AttributeLookupValues)
-					.HasForeignKey(d => d.PossibleValueId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkAttributeLookupValue_Content");
+						.WithMany(p => p.AttributeLookupValues)
+						.HasForeignKey(d => d.PossibleValueId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkAttributeLookupValue_Content");
 			});
 		}
 

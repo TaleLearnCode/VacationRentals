@@ -17,15 +17,12 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("PostalAddressType");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("PostalAddressTypeId")
-					.ValueGeneratedNever();
+				entity.Property(e => e.PostalAddressTypeId).ValueGeneratedNever();
 
-				entity.Property(e => e.Name)
-					.HasColumnName("PostalAddressTypeName")
-					.IsRequired()
-					.HasMaxLength(100)
-					.IsUnicode(false);
+				entity.Property(e => e.PostalAddressTypeName)
+						.IsRequired()
+						.HasMaxLength(100)
+						.IsUnicode(false);
 			});
 		}
 

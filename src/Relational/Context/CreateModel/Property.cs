@@ -16,51 +16,47 @@ namespace TaleLearnCode.VacationRentals.Relational
 			{
 				entity.ToTable("Property");
 
-				entity.Property(e => e.Id)
-					.HasColumnName("PropertyId");
-
 				entity.HasOne(d => d.Description)
-					.WithMany(p => p.PropertyDescriptions)
-					.HasForeignKey(d => d.DescriptionId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkProperty_Content_Description");
+						.WithMany(p => p.PropertyDescriptions)
+						.HasForeignKey(d => d.DescriptionId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkProperty_Content_Description");
 
 				entity.HasOne(d => d.Headline)
-					.WithMany(p => p.PropertyHeadlines)
-					.HasForeignKey(d => d.HeadlineId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkProperty_Content_Headline");
+						.WithMany(p => p.PropertyHeadlines)
+						.HasForeignKey(d => d.HeadlineId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkProperty_Content_Headline");
 
 				entity.HasOne(d => d.PostalAddress)
-					.WithMany(p => p.Properties)
-					.HasForeignKey(d => d.PostalAddressId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkProperty_PostalAddressId");
+						.WithMany(p => p.Properties)
+						.HasForeignKey(d => d.PostalAddressId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkProperty_PostalAddressId");
 
 				entity.HasOne(d => d.PropertyName)
-					.WithMany(p => p.PropertyNames)
-					.HasForeignKey(d => d.PropertyNameId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkProperty_Content_PropertyName");
+						.WithMany(p => p.PropertyPropertyNames)
+						.HasForeignKey(d => d.PropertyNameId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkProperty_Content_PropertyName");
 
 				entity.HasOne(d => d.PropertyType)
-					.WithMany(p => p.Properties)
-					.HasForeignKey(d => d.PropertyTypeId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkProperty_PropertyType");
+						.WithMany(p => p.Properties)
+						.HasForeignKey(d => d.PropertyTypeId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkProperty_PropertyType");
 
 				entity.HasOne(d => d.Summary)
-					.WithMany(p => p.PropertySummaries)
-					.HasForeignKey(d => d.SummaryId)
-					.HasConstraintName("fkProperty_Content_Summary");
+						.WithMany(p => p.PropertySummaries)
+						.HasForeignKey(d => d.SummaryId)
+						.HasConstraintName("fkProperty_Content_Summary");
 
 				entity.HasOne(d => d.UserAccount)
-					.WithMany(p => p.Properties)
-					.HasForeignKey(d => d.UserAccountId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("fkProperty_UserAccount");
+						.WithMany(p => p.Properties)
+						.HasForeignKey(d => d.UserAccountId)
+						.OnDelete(DeleteBehavior.ClientSetNull)
+						.HasConstraintName("fkProperty_UserAccount");
 			});
-
 		}
 
 	}
