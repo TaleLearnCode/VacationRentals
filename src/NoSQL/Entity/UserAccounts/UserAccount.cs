@@ -11,6 +11,9 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.UserAccounts
 		[JsonProperty(PropertyName = "id")]
 		public string Id { get; set; }
 
+		[JsonProperty(PropertyName = "userAccountId")]
+		public string UserAccountId => Id;
+
 		[JsonProperty(PropertyName = "firstName")]
 		public string FirstName { get; set; }
 
@@ -25,6 +28,9 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.UserAccounts
 
 		[JsonProperty(PropertyName = "postalAddresses")]
 		public List<PostalAddress> PostalAddresses { get; set; }
+
+		[JsonProperty(PropertyName = "isDeleted")]
+		public bool IsDeleted { get; set; }
 
 	}
 

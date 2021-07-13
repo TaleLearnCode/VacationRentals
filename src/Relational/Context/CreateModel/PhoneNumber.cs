@@ -23,11 +23,10 @@ namespace TaleLearnCode.VacationRentals.Relational
 						.IsUnicode(false)
 						.IsFixedLength(true);
 
-				entity.Property(e => e.PhoneNumber1)
+				entity.Property(e => e.Number)
 						.IsRequired()
 						.HasMaxLength(20)
-						.IsUnicode(false)
-						.HasColumnName("PhoneNumber");
+						.IsUnicode(false);
 
 				entity.HasOne(d => d.PhoneNumberType)
 						.WithMany(p => p.PhoneNumbers)

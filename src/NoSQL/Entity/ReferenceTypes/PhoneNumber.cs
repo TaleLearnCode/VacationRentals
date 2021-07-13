@@ -6,9 +6,6 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 	public class PhoneNumber
 	{
 
-		[JsonProperty(PropertyName = "id")]
-		public string Id { get; set; }
-
 		[JsonProperty(PropertyName = "phoneNumberTypeId")]
 		public string PhoneNumberTypeId { get; set; }
 

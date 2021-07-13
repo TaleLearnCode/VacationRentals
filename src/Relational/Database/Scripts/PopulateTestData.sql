@@ -12,19 +12,19 @@ USING (VALUES ( 1, 2, '01', '918-833-5215'),
               ( 8, 1, '01', '619-770-5011'),
               ( 9, 2, '01', '720-917-7470'),
               (10, 1, '01', '720-218-6274'))
-AS SOURCE (PhoneNumberId, PhoneNumberTypeId, CountryCode, PhoneNumber)
+AS SOURCE (PhoneNumberId, PhoneNumberTypeId, CountryCode, Number)
 ON TARGET.PhoneNumberId = SOURCE.PhoneNumberId
 WHEN MATCHED THEN UPDATE SET TARGET.PhoneNumberTypeId = SOURCE.PhoneNumberTypeId,
                              TARGET.CountryCode       = SOURCE.CountryCode,
-                             TARGET.PhoneNumber       = SOURCE.PhoneNumber
+                             TARGET.Number            = SOURCE.Number
 WHEN NOT MATCHED THEN INSERT (PhoneNumberId,
                               PhoneNumberTypeId,
                               CountryCode,
-                              PhoneNumber)
+                              Number)
                       VALUES (SOURCE.PhoneNumberId,
                               SOURCE.PhoneNumberTypeId,
                               SOURCE.CountryCode,
-                              SOURCE.PhoneNumber);
+                              SOURCE.Number);
 
 SET IDENTITY_INSERT dbo.PhoneNumber OFF
 

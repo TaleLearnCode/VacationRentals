@@ -13,7 +13,7 @@ namespace TaleLearnCode.VacationRentals.Relational.Entities
 		public int PhoneNumberId { get; set; }
 		public int PhoneNumberTypeId { get; set; }
 		public string CountryCode { get; set; }
-		public string PhoneNumber1 { get; set; }
+		public string Number { get; set; }
 		public bool IsActive { get; set; }
 
 		public virtual PhoneNumberType PhoneNumberType { get; set; }

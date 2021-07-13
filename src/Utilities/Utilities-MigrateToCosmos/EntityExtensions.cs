@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 {
@@ -93,18 +94,18 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				return default;
 		}
 
-		public static NoSQL.Entities.ReferenceTypes.ReferenceType ToNoSqlEntity(this Relational.Entities.PostalAddressType phoneNumberType)
+		public static NoSQL.Entities.ReferenceTypes.ReferenceType ToNoSqlEntity(this Relational.Entities.PostalAddressType postalAddressType)
 		{
-			if (phoneNumberType != default)
+			if (postalAddressType != default)
 			{
 				return new NoSQL.Entities.ReferenceTypes.ReferenceType()
 				{
-					Id = $"PostalAddressType-{phoneNumberType.PostalAddressTypeId}",
+					Id = $"PostalAddressType-{postalAddressType.PostalAddressTypeId}",
 					ReferenceTypeName = "PostalAddressType",
-					Name = new() { { "en-US", phoneNumberType.PostalAddressTypeName } },
-					SystemName = phoneNumberType.PostalAddressTypeName,
-					SortOrder = phoneNumberType.SortOrder,
-					IsDeleted = !phoneNumberType.IsActive
+					Name = new() { { "en-US", postalAddressType.PostalAddressTypeName } },
+					SystemName = postalAddressType.PostalAddressTypeName,
+					SortOrder = postalAddressType.SortOrder,
+					IsDeleted = !postalAddressType.IsActive
 				};
 			}
 			else
@@ -154,6 +155,92 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 					SortOrder = roomType.SortOrder,
 					IsDeleted = !roomType.IsActive
 				};
+			}
+			else
+				return default;
+		}
+
+		public static NoSQL.Entities.UserAccounts.UserAccount ToNoSqlEntity(this Relational.Entities.UserAccount userAccount)
+		{
+			if (userAccount != default)
+			{
+				return new()
+				{
+					Id = $"UserAccount-{userAccount.UserAccountId}",
+					FirstName = userAccount.FirstName,
+					LastName = userAccount.LastName,
+					PhoneNumbers = userAccount.UserAccountPhoneNumbers.ToNoSqlEntity(),
+					PostalAddresses = userAccount.UserAccountPostalAddresses.ToNoSqlEntity(),
+					IsPropertyManager = userAccount.IsPropertyManager,
+					IsDeleted = false
+				};
+			}
+			else
+				return default;
+		}
+
+		public static NoSQL.Entities.ReferenceTypes.PhoneNumber ToNoSqlEntity(this Relational.Entities.PhoneNumber phoneNumber)
+		{
+			if (phoneNumber != default)
+			{
+				return new()
+				{
+					PhoneNumberTypeId = $"PhoneNumberType-{phoneNumber.PhoneNumberType.PhoneNumberTypeId}",
+					PhoneNumberType = (phoneNumber.PhoneNumberType != default) ? phoneNumber.PhoneNumberType.PhoneNumberTypeName : default,
+					CountryCode = phoneNumber.CountryCode,
+					Number = phoneNumber.Number,
+					IsDeleted = !phoneNumber.IsActive
+				};
+			}
+			else
+				return default;
+		}
+
+		public static NoSQL.Entities.ReferenceTypes.PostalAddress ToNoSqlEntity(this Relational.Entities.PostalAddress postalAddress)
+		{
+			if (postalAddress != default)
+			{
+				return new()
+				{
+					PostalAddressTypeId = $"PostalAddressType-{postalAddress.PostalAddressType.PostalAddressTypeId}",
+					PostalAddressType = (postalAddress.PostalAddressType != default) ? postalAddress.PostalAddressType.PostalAddressTypeName : default,
+					StreetAddress1 = postalAddress.StreetAddress1,
+					StreetAddress2 = postalAddress.StreetAddress2,
+					City = postalAddress.City,
+					CountryDivisionCode = postalAddress.CountryDivisionCode,
+					CountryDivision = (postalAddress.Country != default) ? postalAddress.Country.CountryDivisionName : default,
+					CountryCode = postalAddress.CountryCode,
+					Country = (postalAddress.CountryCodeNavigation != default) ? postalAddress.CountryCodeNavigation.CountryName : default,
+					IsDeleted = (bool)!postalAddress.IsActive
+				};
+			}
+			else
+				return default;
+		}
+
+		public static List<NoSQL.Entities.ReferenceTypes.PhoneNumber> ToNoSqlEntity(this ICollection<Relational.Entities.UserAccountPhoneNumber> UserAccountPhoneNumbers)
+		{
+			if (UserAccountPhoneNumbers != default && UserAccountPhoneNumbers.Any())
+			{
+				List<NoSQL.Entities.ReferenceTypes.PhoneNumber> response = new();
+				foreach (Relational.Entities.UserAccountPhoneNumber userAccountPhoneNumber in UserAccountPhoneNumbers)
+					if (userAccountPhoneNumber.PhoneNumber != default)
+						response.Add(userAccountPhoneNumber.PhoneNumber.ToNoSqlEntity());
+				return response;
+			}
+			else
+				return default;
+		}
+
+		public static List<NoSQL.Entities.ReferenceTypes.PostalAddress> ToNoSqlEntity(this ICollection<Relational.Entities.UserAccountPostalAddress> userAccountPostalAddresses)
+		{
+			if (userAccountPostalAddresses != default && userAccountPostalAddresses.Any())
+			{
+				List<NoSQL.Entities.ReferenceTypes.PostalAddress> response = new();
+				foreach (Relational.Entities.UserAccountPostalAddress userAccountPostalAddress in userAccountPostalAddresses)
+					if (userAccountPostalAddress.PostalAddress != default)
+						response.Add(userAccountPostalAddress.PostalAddress.ToNoSqlEntity());
+				return response;
 			}
 			else
 				return default;

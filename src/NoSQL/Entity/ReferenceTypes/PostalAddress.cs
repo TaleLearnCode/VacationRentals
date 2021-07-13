@@ -5,9 +5,6 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes
 	public class PostalAddress
 	{
 
-		[JsonProperty(PropertyName = "id")]
-		public string Id { get; set; }
-
 		[JsonProperty(PropertyName = "postalAddressTypeId")]
 		public string PostalAddressTypeId { get; set; }
 

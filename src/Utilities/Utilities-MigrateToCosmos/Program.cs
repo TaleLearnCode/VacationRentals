@@ -26,6 +26,7 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				Database cosmosDatabase = await GetCosmosDatabase(cosmosClient, "VacationRentals", false);
 
 				Container referenceTypesContainer = await GetCosmosContainer(cosmosDatabase, "ReferenceTypes", "referenceTypeName");
+				Container userAccountContainer = await GetCosmosContainer(cosmosDatabase, "UserAccounts", "userAccountId");
 
 				//await MigrateCountries(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateCountryDivisions(vacationRentalsContext, referenceTypesContainer);
@@ -33,7 +34,8 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				//await MigratePhoneNumberTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigratePostalAddressTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigratePropertyTypes(vacationRentalsContext, referenceTypesContainer);
-				await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
+				//await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
+				await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
 			}
 
 		}
@@ -343,6 +345,46 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				}
 			}
 
+		}
+
+		private static async Task MigrateUserAccounts(VacationRentalsContext context, Container container)
+		{
+			ShowSectionHeader("Migrating User Accounts");
+
+			List<Relational.Entities.UserAccount> userAccounts =
+				context.UserAccounts
+					.Include(x => x.UserAccountPhoneNumbers)
+						.ThenInclude(x => x.PhoneNumber)
+							.ThenInclude(x => x.PhoneNumberType)
+					.Include(x => x.UserAccountPostalAddresses)
+						.ThenInclude(x => x.PostalAddress)
+							.ThenInclude(x => x.PostalAddressType)
+					.Include(x => x.UserAccountPostalAddresses)
+						.ThenInclude(x => x.PostalAddress)
+							.ThenInclude(x => x.Country)
+					.Include(x => x.UserAccountPostalAddresses)
+						.ThenInclude(x => x.PostalAddress)
+							.ThenInclude(x => x.CountryCodeNavigation)
+					.ToList();
+
+			foreach (Relational.Entities.UserAccount userAccount in userAccounts)
+			{
+				Console.WriteLine($"Migraing User Account: {userAccount.FirstName} {userAccount.LastName}");
+				NoSQL.Entities.UserAccounts.UserAccount cosmosUserAccount = userAccount.ToNoSqlEntity();
+				try
+				{
+					ItemResponse<NoSQL.Entities.UserAccounts.UserAccount> itemResponse = await container.CreateItemAsync(cosmosUserAccount, new PartitionKey(cosmosUserAccount.Id));
+					Console.WriteLine($"Created User Account ({itemResponse.Resource.Id}); Operation consumed {itemResponse.RequestCharge} RUs.");
+				}
+				catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.Conflict)
+				{
+					WriteLine($"User Account {cosmosUserAccount.Id} already exists", ConsoleColor.Yellow);
+				}
+				catch (Exception ex)
+				{
+					WriteLine($"Error migrating User Account {cosmosUserAccount.Id}: {ex.Message}", ConsoleColor.Red);
+				}
+			}
 
 		}
 
