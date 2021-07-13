@@ -263,6 +263,23 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				return default;
 		}
 
+		public static NoSQL.Entities.ReferenceTypes.ReferenceType ToNoSqlEntity(this Relational.Entities.AttributeCategory attributeCategorty)
+		{
+			if (attributeCategorty != default)
+			{
+				return new NoSQL.Entities.ReferenceTypes.ReferenceType()
+				{
+					Id = $"AttributeCategory-{attributeCategorty.AttributeCategoryId}",
+					ReferenceTypeName = "AttributeDataType",
+					Name = new() { { "en-US", attributeCategorty.AttributeCategoryName } },
+					SystemName = attributeCategorty.AttributeCategoryName,
+					IsDeleted = !attributeCategorty.IsActive
+				};
+			}
+			else
+				return default;
+		}
+
 
 	}
 

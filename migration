@@ -12,7 +12,7 @@
 	UserAccountPhoneNumber
 	UserAccountPostalAddress
 	AttributeDataType
-AttributeCategory
+	AttributeCategory
 AttributeType
 AttributeLookupValue
 Property

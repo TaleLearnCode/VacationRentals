@@ -36,7 +36,8 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				//await MigratePropertyTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
-				await MigrateAttributeDataType(vacationRentalsContext, referenceTypesContainer);
+				//await MigrateAttributeDataType(vacationRentalsContext, referenceTypesContainer);
+				await MigrateAttributeCategory(vacationRentalsContext, referenceTypesContainer);
 			}
 
 		}
@@ -410,6 +411,33 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				catch (Exception ex)
 				{
 					WriteLine($"Error migrating Attribute Data Type {cosmosLanguageCulture.Id}: {ex.Message}", ConsoleColor.Red);
+				}
+			}
+
+
+		}
+
+		private static async Task MigrateAttributeCategory(VacationRentalsContext context, Container container)
+		{
+			ShowSectionHeader("Migrating Attribute Categories");
+
+			List<Relational.Entities.AttributeCategory> attributeDataTypes = context.AttributeCategories.ToList();
+			foreach (Relational.Entities.AttributeCategory attributeDataType in attributeDataTypes)
+			{
+				Console.WriteLine($"Migrating Attribute Category: {attributeDataType.AttributeCategoryName}");
+				NoSQL.Entities.ReferenceTypes.ReferenceType attributeCategory = attributeDataType.ToNoSqlEntity();
+				try
+				{
+					ItemResponse<NoSQL.Entities.ReferenceTypes.ReferenceType> itemResponse = await container.CreateItemAsync(attributeCategory, new PartitionKey(attributeCategory.ReferenceTypeName));
+					Console.WriteLine($"Created Attribute Category ({itemResponse.Resource.Id}); Operation consumed {itemResponse.RequestCharge} RUs.");
+				}
+				catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.Conflict)
+				{
+					WriteLine($"Attribute Category {attributeCategory.Id} already exists", ConsoleColor.Yellow);
+				}
+				catch (Exception ex)
+				{
+					WriteLine($"Error migrating Attribute Category {attributeCategory.Id}: {ex.Message}", ConsoleColor.Red);
 				}
 			}
 
