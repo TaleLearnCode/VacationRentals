@@ -43,8 +43,9 @@ namespace TaleLearnCode.VacationRentals.Relational
 		/// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-
+			
 			CreateModel.AttributeCategory(modelBuilder);
+			CreateModel.AttributeDataType(modelBuilder);
 			CreateModel.AttributeLookupValue(modelBuilder);
 			CreateModel.AttributeLookupValue(modelBuilder);
 			CreateModel.AttributeType(modelBuilder);

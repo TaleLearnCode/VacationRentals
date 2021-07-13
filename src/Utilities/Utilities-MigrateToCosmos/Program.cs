@@ -35,7 +35,8 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				//await MigratePostalAddressTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigratePropertyTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
-				await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
+				//await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
+				await MigrateAttributeDataType(vacationRentalsContext, referenceTypesContainer);
 			}
 
 		}
@@ -385,6 +386,33 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 					WriteLine($"Error migrating User Account {cosmosUserAccount.Id}: {ex.Message}", ConsoleColor.Red);
 				}
 			}
+
+		}
+
+		private static async Task MigrateAttributeDataType(VacationRentalsContext context, Container container)
+		{
+			ShowSectionHeader("Migrating Attribute Data Types");
+
+			List<Relational.Entities.AttributeDataType> attributeDataTypes = context.AttributeDataTypes.ToList();
+			foreach (Relational.Entities.AttributeDataType attributeDataType in attributeDataTypes)
+			{
+				Console.WriteLine($"Migrating Attribute Data Type: {attributeDataType.AttributeDataTypeName}");
+				NoSQL.Entities.ReferenceTypes.ReferenceType cosmosLanguageCulture = attributeDataType.ToNoSqlEntity();
+				try
+				{
+					ItemResponse<NoSQL.Entities.ReferenceTypes.ReferenceType> itemResponse = await container.CreateItemAsync(cosmosLanguageCulture, new PartitionKey(cosmosLanguageCulture.ReferenceTypeName));
+					Console.WriteLine($"Created Attribute Data Type ({itemResponse.Resource.Id}); Operation consumed {itemResponse.RequestCharge} RUs.");
+				}
+				catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.Conflict)
+				{
+					WriteLine($"Attribute Data Type {cosmosLanguageCulture.Id} already exists", ConsoleColor.Yellow);
+				}
+				catch (Exception ex)
+				{
+					WriteLine($"Error migrating Attribute Data Type {cosmosLanguageCulture.Id}: {ex.Message}", ConsoleColor.Red);
+				}
+			}
+
 
 		}
 

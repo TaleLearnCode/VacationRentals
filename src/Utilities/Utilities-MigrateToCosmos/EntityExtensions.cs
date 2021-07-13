@@ -246,6 +246,23 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				return default;
 		}
 
+		public static NoSQL.Entities.ReferenceTypes.ReferenceType ToNoSqlEntity(this Relational.Entities.AttributeDataType attributeDataType)
+		{
+			if (attributeDataType != default)
+			{
+				return new NoSQL.Entities.ReferenceTypes.ReferenceType()
+				{
+					Id = $"AttributeDataType-{attributeDataType.AttributeDataTypeId}",
+					ReferenceTypeName = "AttributeDataType",
+					Name = new() { { "en-US", attributeDataType.AttributeDataTypeName } },
+					SystemName = attributeDataType.AttributeDataTypeName,
+					IsDeleted = !attributeDataType.IsActive
+				};
+			}
+			else
+				return default;
+		}
+
 
 	}
 

@@ -6,12 +6,12 @@
 	PostalAddressType
 	PropertyType
 	RoomType
-UserAccount
-PostalAddress
-PhoneNumber
-UserAccountPhoneNumber
-UserAccountPostalAddress
-AttributeDataType
+	UserAccount
+	PostalAddress
+	PhoneNumber
+	UserAccountPhoneNumber
+	UserAccountPostalAddress
+	AttributeDataType
 AttributeCategory
 AttributeType
 AttributeLookupValue
