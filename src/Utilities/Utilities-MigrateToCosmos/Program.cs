@@ -30,18 +30,19 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				Container attributesContainer = await GetCosmosContainer(cosmosDatabase, "Attributes", "attributeTypeId");
 				Container propertiesContainer = await GetCosmosContainer(cosmosDatabase, "Properties", "propertyId");
 
-				//await MigrateCountries(vacationRentalsContext, referenceTypesContainer);
-				//await MigrateCountryDivisions(vacationRentalsContext, referenceTypesContainer);
-				//await MigrateLanguageCultures(vacationRentalsContext, referenceTypesContainer);
-				//await MigratePhoneNumberTypes(vacationRentalsContext, referenceTypesContainer);
-				//await MigratePostalAddressTypes(vacationRentalsContext, referenceTypesContainer);
-				//await MigratePropertyTypes(vacationRentalsContext, referenceTypesContainer);
-				//await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
-				//await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
-				//await MigrateAttributeDataType(vacationRentalsContext, referenceTypesContainer);
-				//await MigrateAtributeCategories(vacationRentalsContext, referenceTypesContainer);
-				//await MigrateAttributeTypes(vacationRentalsContext, attributesContainer);
+				await MigrateCountries(vacationRentalsContext, referenceTypesContainer);
+				await MigrateCountryDivisions(vacationRentalsContext, referenceTypesContainer);
+				await MigrateLanguageCultures(vacationRentalsContext, referenceTypesContainer);
+				await MigratePhoneNumberTypes(vacationRentalsContext, referenceTypesContainer);
+				await MigratePostalAddressTypes(vacationRentalsContext, referenceTypesContainer);
+				await MigratePropertyTypes(vacationRentalsContext, referenceTypesContainer);
+				await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
+				await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
+				await MigrateAttributeDataTypes(vacationRentalsContext, referenceTypesContainer);
+				await MigrateAtributeCategories(vacationRentalsContext, referenceTypesContainer);
+				await MigrateAttributeTypes(vacationRentalsContext, attributesContainer);
 				await MigrateProperties(vacationRentalsContext, propertiesContainer);
+				await MigrateRentalRates(vacationRentalsContext, propertiesContainer);
 			}
 
 		}
@@ -555,6 +556,33 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				catch (Exception ex)
 				{
 					WriteLine($"Error migrating Property {cosmosProperty.Id}: {ex.Message}", ConsoleColor.Red);
+				}
+			}
+
+
+		}
+
+		private static async Task MigrateRentalRates(VacationRentalsContext context, Container container)
+		{
+			ShowSectionHeader("Migrating Rental Rates");
+
+			List<Relational.Entities.RentalRate> rentalRates = context.RentalRates.ToList();
+			foreach (Relational.Entities.RentalRate rentalRate in rentalRates)
+			{
+				Console.WriteLine($"Migrating Rental Rate: {rentalRate.RentalRateId}");
+				NoSQL.Entities.Properties.RentalRate cosmosRentalRate = rentalRate.ToNoSqlEntity();
+				try
+				{
+					ItemResponse<NoSQL.Entities.Properties.RentalRate> itemResponse = await container.CreateItemAsync(cosmosRentalRate, new PartitionKey(cosmosRentalRate.PropertyId));
+					Console.WriteLine($"Created Rental Rate ({itemResponse.Resource.Id}); Operation consumed {itemResponse.RequestCharge} RUs.");
+				}
+				catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.Conflict)
+				{
+					WriteLine($"Rental Rate {cosmosRentalRate.Id} already exists", ConsoleColor.Yellow);
+				}
+				catch (Exception ex)
+				{
+					WriteLine($"Error migrating Rental Rate {cosmosRentalRate.Id}: {ex.Message}", ConsoleColor.Red);
 				}
 			}
 

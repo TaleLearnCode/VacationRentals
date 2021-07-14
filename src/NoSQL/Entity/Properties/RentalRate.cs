@@ -8,7 +8,7 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Properties
 	{
 
 		[JsonProperty(PropertyName = "id")]
-		public string Id { get; set; }
+		public string Id { get; set; } = Guid.NewGuid().ToString();
 
 		[JsonProperty(PropertyName = "propertyId")]
 		public string PropertyId { get; set; }

@@ -459,6 +459,22 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				return default;
 		}
 
+		public static NoSQL.Entities.Properties.RentalRate ToNoSqlEntity(this Relational.Entities.RentalRate rentalRate)
+		{
+			if (rentalRate != default)
+			{
+				return new()
+				{
+					PropertyId = rentalRate.PropertyId.ToString(),
+					StartDate = rentalRate.StartDate,
+					EndDate = rentalRate.EndDate,
+					Rate = rentalRate.Rate
+				};
+			}
+			else
+				return default;
+		}
+
 	}
 
 }
