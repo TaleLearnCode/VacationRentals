@@ -28,6 +28,7 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				Container referenceTypesContainer = await GetCosmosContainer(cosmosDatabase, "ReferenceTypes", "referenceTypeName");
 				Container userAccountContainer = await GetCosmosContainer(cosmosDatabase, "UserAccounts", "userAccountId");
 				Container attributesContainer = await GetCosmosContainer(cosmosDatabase, "Attributes", "attributeTypeId");
+				Container propertiesContainer = await GetCosmosContainer(cosmosDatabase, "Properties", "propertyId");
 
 				//await MigrateCountries(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateCountryDivisions(vacationRentalsContext, referenceTypesContainer);
@@ -39,7 +40,8 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				//await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
 				//await MigrateAttributeDataType(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateAtributeCategories(vacationRentalsContext, referenceTypesContainer);
-				await MigrateAttributeTypes(vacationRentalsContext, attributesContainer);
+				//await MigrateAttributeTypes(vacationRentalsContext, attributesContainer);
+				await MigrateProperties(vacationRentalsContext, propertiesContainer);
 			}
 
 		}
@@ -476,6 +478,83 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				catch (Exception ex)
 				{
 					WriteLine($"Error migrating Attribute Category {cosmosAttributeType.Id}: {ex.Message}", ConsoleColor.Red);
+				}
+			}
+
+
+		}
+
+		private static async Task MigrateProperties(VacationRentalsContext context, Container container)
+		{
+			ShowSectionHeader("Migrating Properties");
+
+			List<Relational.Entities.Property> properties =
+				context.Properties
+					.Include(x => x.Description)
+						.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.Headline)
+						.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.PostalAddress)
+						.ThenInclude(x => x.Country)
+					.Include(x => x.PostalAddress)
+						.ThenInclude(x => x.CountryCodeNavigation)
+					.Include(x => x.PostalAddress)
+						.ThenInclude(x => x.PostalAddressType)
+					.Include(x => x.PropertyName)
+						.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.PropertyType)
+						.ThenInclude(x => x.Label)
+							.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.Summary)
+						.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.UserAccount)
+					.Include(x => x.PropertyAttributes)
+						.ThenInclude(x => x.Attribute)
+							.ThenInclude(x => x.AttributeType)
+								.ThenInclude(x => x.Label)
+									.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.PropertyAttributes)
+						.ThenInclude(x => x.Attribute)
+							.ThenInclude(x => x.AttributeLookupValue)
+								.ThenInclude(x => x.PossibleValue)
+									.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.Rooms)
+						.ThenInclude(x => x.Description)
+							.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.Rooms)
+						.ThenInclude(x => x.RoomName)
+							.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.Rooms)
+						.ThenInclude(x => x.RoomType)
+					.Include(x => x.Rooms)
+						.ThenInclude(x => x.RoomAttributes)
+							.ThenInclude(x => x.Attribute)
+								.ThenInclude(x => x.AttributeType)
+									.ThenInclude(x => x.Label)
+										.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.Rooms)
+						.ThenInclude(x => x.RoomAttributes)
+							.ThenInclude(x => x.Attribute)
+								.ThenInclude(x => x.AttributeLookupValue)
+									.ThenInclude(x => x.PossibleValue)
+										.ThenInclude(x => x.ContentCopies)
+					.ToList();
+			foreach (Relational.Entities.Property property in properties)
+			{
+				Console.WriteLine($"Migrating Property: {property.PropertyId}");
+				NoSQL.Entities.Properties.Property cosmosProperty = property.ToNoSqlEntity();
+				try
+				{
+					ItemResponse<NoSQL.Entities.Properties.Property> itemResponse = await container.CreateItemAsync(cosmosProperty, new PartitionKey(cosmosProperty.PropertyId));
+					Console.WriteLine($"Created Property ({itemResponse.Resource.Id}); Operation consumed {itemResponse.RequestCharge} RUs.");
+				}
+				catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.Conflict)
+				{
+					WriteLine($"Property {cosmosProperty.Id} already exists", ConsoleColor.Yellow);
+				}
+				catch (Exception ex)
+				{
+					WriteLine($"Error migrating Property {cosmosProperty.Id}: {ex.Message}", ConsoleColor.Red);
 				}
 			}
 

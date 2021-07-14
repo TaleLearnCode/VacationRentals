@@ -15,11 +15,11 @@
 	AttributeCategory
 	AttributeType
 	AttributeLookupValue
-Property
-PropertyAttribute
+	Property
+	PropertyAttribute
 RentalRate
-Room
-AttributeValue
-RoomAttribute
-Content
-ContentCopy
+	Room
+	AttributeValue
+	RoomAttribute
+	Content
+	ContentCopy

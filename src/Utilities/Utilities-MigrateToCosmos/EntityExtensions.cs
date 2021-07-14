@@ -202,8 +202,8 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 			{
 				return new()
 				{
-					PostalAddressTypeId = $"PostalAddressType-{postalAddress.PostalAddressType.PostalAddressTypeId}",
-					PostalAddressType = (postalAddress.PostalAddressType != default) ? postalAddress.PostalAddressType.PostalAddressTypeName : default,
+					PostalAddressTypeId = $"PostalAddressType-{postalAddress.PostalAddressType?.PostalAddressTypeId}",
+					PostalAddressType = postalAddress.PostalAddressType?.PostalAddressTypeName,
 					StreetAddress1 = postalAddress.StreetAddress1,
 					StreetAddress2 = postalAddress.StreetAddress2,
 					City = postalAddress.City,
@@ -288,6 +288,7 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				foreach (Relational.Entities.AttributeLookupValue attributeLookupValue in attributeLookupValues)
 					response.Add(new()
 					{
+						Id = attributeLookupValue.AttributeLookupValueId.ToString(),
 						Name = attributeLookupValue.AttributeLookupValueName,
 						SortOrder = attributeLookupValue.SortOrder,
 						Label = attributeLookupValue.PossibleValue.ContentCopies.ToNoSqlContentCopy()
@@ -320,7 +321,143 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				return default;
 		}
 
+		public static NoSQL.Entities.Properties.Property ToNoSqlEntity(this Relational.Entities.Property property)
+		{
+			if (property != default)
+			{
+				return new()
+				{
+					Id = property.PropertyId.ToString(),
+					Name = property.PropertyName?.ContentCopies?.ToNoSqlContentCopy(),
+					Headline = property.Headline?.ContentCopies?.ToNoSqlContentCopy(),
+					Summary = property.Summary?.ContentCopies?.ToNoSqlContentCopy(),
+					Description = property.Description?.ContentCopies?.ToNoSqlContentCopy(),
+					PropertyTypeId = property.PropertyTypeId.ToString(),
+					PropertyType = property.PropertyType?.Label?.ContentCopies?.ToNoSqlContentCopy(),
+					Address = property.PostalAddress?.ToNoSqlEntity(),
+					Attributes = property.PropertyAttributes?.ToNoSqlEntity(),
+					Rooms = property.Rooms?.ToNoSqlEntity()
+				};
+			}
+			else
+				return default;
+		}
 
+		public static List<NoSQL.Entities.Attributes.AttributeValue> ToNoSqlEntity(this ICollection<Relational.Entities.PropertyAttribute> propertyAttributes)
+		{
+			if (propertyAttributes != default && propertyAttributes.Any())
+			{
+				List<NoSQL.Entities.Attributes.AttributeValue> response = new();
+				foreach (Relational.Entities.PropertyAttribute propertyAttribute in propertyAttributes)
+				{
+
+					NoSQL.Entities.ContentCopy attributeValue = new();
+					if (propertyAttribute.Attribute.AttributeType.AttributeDataTypeId == 4)
+					{
+						attributeValue = propertyAttribute.Attribute?.AttributeLookupValue?.PossibleValue?.ContentCopies?.ToNoSqlContentCopy();
+					}
+					else
+					{
+						attributeValue = new()
+						{
+							{
+								"en-US",
+								propertyAttribute.Attribute.AttributeType.AttributeDataTypeId switch
+								{
+									1 or 3 => propertyAttribute.Attribute.AttributeNumbericValue,
+									_ => string.Empty,
+								}
+							}
+						};
+					}
+
+					response.Add(new()
+					{
+						AttributeTypeId = propertyAttribute.Attribute?.AttributeTypeId.ToString(),
+						AttributeType = propertyAttribute.Attribute?.AttributeType?.Label?.ContentCopies?.ToNoSqlContentCopy(),
+						LookupValueId = (propertyAttribute.Attribute?.AttributeType?.AttributeDataTypeId == 4) ? propertyAttribute.Attribute?.AttributeLookupValueId.ToString() : default,
+						Value = attributeValue
+					});
+				}
+				return response;
+			}
+			else
+				return default;
+		}
+
+		public static List<NoSQL.Entities.Attributes.AttributeValue> ToNoSqlEntity(this ICollection<Relational.Entities.RoomAttribute> roomAttributes)
+		{
+			if (roomAttributes != default && roomAttributes.Any())
+			{
+				List<NoSQL.Entities.Attributes.AttributeValue> response = new();
+				foreach (Relational.Entities.RoomAttribute roomAttribute in roomAttributes)
+				{
+
+					NoSQL.Entities.ContentCopy attributeValue = new();
+					if (roomAttribute.Attribute.AttributeType.AttributeDataTypeId == 4)
+					{
+						attributeValue = roomAttribute.Attribute?.AttributeLookupValue?.PossibleValue?.ContentCopies?.ToNoSqlContentCopy();
+					}
+					else
+					{
+						attributeValue = new()
+						{
+							{
+								"en-US",
+								roomAttribute.Attribute.AttributeType.AttributeDataTypeId switch
+								{
+									1 or 3 => roomAttribute.Attribute.AttributeNumbericValue,
+									_ => string.Empty,
+								}
+							}
+						};
+					}
+
+					response.Add(new()
+					{
+						AttributeTypeId = roomAttribute.Attribute?.AttributeTypeId.ToString(),
+						AttributeType = roomAttribute.Attribute?.AttributeType?.Label?.ContentCopies?.ToNoSqlContentCopy(),
+						LookupValueId = (roomAttribute.Attribute?.AttributeType?.AttributeDataTypeId == 4) ? roomAttribute.Attribute?.AttributeLookupValueId.ToString() : default,
+						Value = attributeValue
+					});
+				}
+				return response;
+			}
+			else
+				return default;
+		}
+
+
+		public static NoSQL.Entities.Properties.Room ToNoSqlEntity(this Relational.Entities.Room room)
+		{
+			if (room != default)
+			{
+				return new()
+				{
+					RoomTypeId = $"RoomType-{room.RoomTypeId}",
+					RoomType = new() { { "en-US", room.RoomType?.RoomTypeName } },
+					Name = room.RoomName.ContentCopies?.ToNoSqlContentCopy(),
+					Description = room.Description.ContentCopies?.ToNoSqlContentCopy(),
+					Attributes = room.RoomAttributes?.ToNoSqlEntity(),
+					IsDeleted = (bool)!room.IsActive
+				};
+			}
+			else
+				return default;
+		}
+
+		public static List<NoSQL.Entities.Properties.Room> ToNoSqlEntity(this ICollection<Relational.Entities.Room> rooms)
+		{
+			if (rooms != default && rooms.Any())
+			{
+				List<NoSQL.Entities.Properties.Room> response = new();
+				foreach (Relational.Entities.Room room in rooms)
+					response.Add(room.ToNoSqlEntity());
+				return response;
+			}
+			else
+				return default;
+		}
 
 	}
 

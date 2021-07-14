@@ -11,13 +11,13 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Attributes
 		public string AttributeTypeId { get; set; }
 
 		[JsonProperty(PropertyName = "attributeType")]
-		public AttributeType AttributeType { get; set; }
+		public ContentCopy AttributeType { get; set; }
 
 		[JsonProperty(PropertyName = "lookupValueId")]
 		public string LookupValueId { get; set; }
 
 		[JsonProperty(PropertyName = "value")]
-		public List<ContentCopy> Value { get; set; }
+		public ContentCopy Value { get; set; }
 
 	}
 

@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using TaleLearnCode.VacationRentals.NoSQL.Entities.Attributes;
 using TaleLearnCode.VacationRentals.NoSQL.Entities.ReferenceTypes;
 
 namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Properties
@@ -10,8 +12,8 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Properties
 		[JsonProperty(PropertyName = "id")]
 		public string Id { get; set; }
 
-		[JsonProperty(PropertyName = "languageCultureId")]
-		public string LanguageCultureId { get; set; }
+		[JsonProperty(PropertyName = "propertyId")]
+		public string PropertyId => Id;
 
 		[JsonProperty(PropertyName = "name")]
 		public ContentCopy Name { get; set; }
@@ -33,6 +35,12 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Properties
 
 		[JsonProperty(PropertyName = "address")]
 		public PostalAddress Address { get; set; }
+
+		[JsonProperty(PropertyName = "attributes")]
+		public List<AttributeValue> Attributes { get; set; }
+
+		[JsonProperty(PropertyName = "rooms")]
+		public List<Room> Rooms { get; set; }
 
 		[JsonProperty(PropertyName = "isDeleted")]
 		public bool IsDeleted { get; set; }
