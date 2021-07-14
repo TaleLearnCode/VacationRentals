@@ -280,6 +280,47 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				return default;
 		}
 
+		public static List<NoSQL.Entities.Attributes.AttributePossibleValue> ToNoSqlEntity(this ICollection<Relational.Entities.AttributeLookupValue> attributeLookupValues)
+		{
+			if (attributeLookupValues != default && attributeLookupValues.Any())
+			{
+				List<NoSQL.Entities.Attributes.AttributePossibleValue> response = new();
+				foreach (Relational.Entities.AttributeLookupValue attributeLookupValue in attributeLookupValues)
+					response.Add(new()
+					{
+						Name = attributeLookupValue.AttributeLookupValueName,
+						SortOrder = attributeLookupValue.SortOrder,
+						Label = attributeLookupValue.PossibleValue.ContentCopies.ToNoSqlContentCopy()
+					});
+				return response;
+			}
+			else
+				return default;
+		}
+
+		public static NoSQL.Entities.Attributes.AttributeType ToNoSqlEntity(this Relational.Entities.AttributeType attributeType)
+		{
+			if (attributeType != default)
+			{
+				return new()
+				{
+					Id = attributeType.AttributeTypeId.ToString(),
+					Name = attributeType.AttributeTypeName,
+					AttributeDataTypeId = attributeType.AttributeDataTypeId.ToString(),
+					AttributeDataType = attributeType.AttributeDataType?.AttributeDataTypeName,
+					AttributeCategoryId = attributeType.AttributeCategoryId.ToString(),
+					AttributeCategory = attributeType.AttributeCategory?.AttributeCategoryName,
+					Label = attributeType.Label?.ContentCopies?.ToNoSqlContentCopy(),
+					PossibleValues = attributeType.AttributeLookupValues.ToNoSqlEntity(),
+					SortOrder = attributeType.SortOrder,
+					IsDeleted = !attributeType.IsActive
+				};
+			}
+			else
+				return default;
+		}
+
+
 
 	}
 

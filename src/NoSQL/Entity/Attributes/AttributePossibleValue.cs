@@ -14,7 +14,7 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Attributes
 		public int SortOrder { get; set; }
 
 		[JsonProperty(PropertyName = "label")]
-		public List<ContentCopy> Label { get; set; }
+		public ContentCopy Label { get; set; }
 
 	}
 

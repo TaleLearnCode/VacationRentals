@@ -10,6 +10,7 @@ namespace TaleLearnCode.VacationRentals.Relational.Entities
 		}
 
 		public int AttributeLookupValueId { get; set; }
+		public string AttributeLookupValueName { get; set; }
 		public int AttributeTypeId { get; set; }
 		public int PossibleValueId { get; set; }
 		public int SortOrder { get; set; }

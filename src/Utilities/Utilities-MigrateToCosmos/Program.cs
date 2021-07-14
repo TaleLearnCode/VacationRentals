@@ -23,10 +23,11 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				using VacationRentalsContext vacationRentalsContext = new(appSettings);
 				using CosmosClient cosmosClient = new(appSettings.CosmosEndpointUrl, appSettings.CosmosKey);
 
-				Database cosmosDatabase = await GetCosmosDatabase(cosmosClient, "VacationRentals", false);
+				Database cosmosDatabase = await GetCosmosDatabase(cosmosClient, "VacationRentals", true);
 
 				Container referenceTypesContainer = await GetCosmosContainer(cosmosDatabase, "ReferenceTypes", "referenceTypeName");
 				Container userAccountContainer = await GetCosmosContainer(cosmosDatabase, "UserAccounts", "userAccountId");
+				Container attributesContainer = await GetCosmosContainer(cosmosDatabase, "Attributes", "attributeTypeId");
 
 				//await MigrateCountries(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateCountryDivisions(vacationRentalsContext, referenceTypesContainer);
@@ -37,7 +38,8 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 				//await MigrateRoomTypes(vacationRentalsContext, referenceTypesContainer);
 				//await MigrateUserAccounts(vacationRentalsContext, userAccountContainer);
 				//await MigrateAttributeDataType(vacationRentalsContext, referenceTypesContainer);
-				await MigrateAttributeCategory(vacationRentalsContext, referenceTypesContainer);
+				//await MigrateAtributeCategories(vacationRentalsContext, referenceTypesContainer);
+				await MigrateAttributeTypes(vacationRentalsContext, attributesContainer);
 			}
 
 		}
@@ -390,7 +392,7 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 
 		}
 
-		private static async Task MigrateAttributeDataType(VacationRentalsContext context, Container container)
+		private static async Task MigrateAttributeDataTypes(VacationRentalsContext context, Container container)
 		{
 			ShowSectionHeader("Migrating Attribute Data Types");
 
@@ -417,7 +419,7 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 
 		}
 
-		private static async Task MigrateAttributeCategory(VacationRentalsContext context, Container container)
+		private static async Task MigrateAtributeCategories(VacationRentalsContext context, Container container)
 		{
 			ShowSectionHeader("Migrating Attribute Categories");
 
@@ -443,6 +445,43 @@ namespace TaleLearnCode.VacationRentals.Utilities.MigrateToCosmos
 
 
 		}
+
+		private static async Task MigrateAttributeTypes(VacationRentalsContext context, Container container)
+		{
+			ShowSectionHeader("Migrating Attribute Types");
+
+			List<Relational.Entities.AttributeType> attributeTypes =
+				context.AttributeTypes
+					.Include(x => x.AttributeLookupValues)
+						.ThenInclude(x => x.PossibleValue)
+							.ThenInclude(x => x.ContentCopies)
+					.Include(x => x.AttributeCategory)
+					.Include(x => x.AttributeDataType)
+					.Include(x => x.Label)
+						.ThenInclude(x => x.ContentCopies)
+					.ToList();
+			foreach (Relational.Entities.AttributeType attributeType in attributeTypes)
+			{
+				Console.WriteLine($"Migrating Attribute Type: {attributeType.AttributeTypeName}");
+				NoSQL.Entities.Attributes.AttributeType cosmosAttributeType = attributeType.ToNoSqlEntity();
+				try
+				{
+					ItemResponse<NoSQL.Entities.Attributes.AttributeType> itemResponse = await container.CreateItemAsync(cosmosAttributeType, new PartitionKey(cosmosAttributeType.AttributeTypeId));
+					Console.WriteLine($"Created Attribute Type ({itemResponse.Resource.Id}); Operation consumed {itemResponse.RequestCharge} RUs.");
+				}
+				catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.Conflict)
+				{
+					WriteLine($"Attribute Type {cosmosAttributeType.Id} already exists", ConsoleColor.Yellow);
+				}
+				catch (Exception ex)
+				{
+					WriteLine($"Error migrating Attribute Category {cosmosAttributeType.Id}: {ex.Message}", ConsoleColor.Red);
+				}
+			}
+
+
+		}
+
 
 
 	}

@@ -11,22 +11,22 @@ namespace TaleLearnCode.VacationRentals.NoSQL.Entities.Attributes
 		public string Id { get; set; }
 
 		[JsonProperty(PropertyName = "attributeTypeId")]
-		public string AttributeTypeId { get; set; }
-
-		[JsonProperty(PropertyName = "languageCultureId")]
-		public string LanguageCultureId { get; set; }
+		public string AttributeTypeId => Id;
 
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
 
+		[JsonProperty(PropertyName = "attributeDataTypeId")]
+		public string AttributeDataTypeId { get; set; }
+
 		[JsonProperty(PropertyName = "attributeDataType")]
-		public ReferenceType AttributeDataType { get; set; }
+		public string AttributeDataType { get; set; }
 
 		[JsonProperty(PropertyName = "attributeCategoryId")]
 		public string AttributeCategoryId { get; set; }
 
 		[JsonProperty(PropertyName = "attributeCategory")]
-		public ReferenceType AttributeCategory { get; set; }
+		public string AttributeCategory { get; set; }
 
 		[JsonProperty(PropertyName = "label")]
 		public ContentCopy Label { get; set; }

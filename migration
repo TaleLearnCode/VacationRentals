@@ -13,8 +13,8 @@
 	UserAccountPostalAddress
 	AttributeDataType
 	AttributeCategory
-AttributeType
-AttributeLookupValue
+	AttributeType
+	AttributeLookupValue
 Property
 PropertyAttribute
 RentalRate
